@@ -35,7 +35,7 @@ class ChatController extends Controller
     }
 /**
      * @OA\Post(
-     *     path="/api/chat/send",
+     *     path="/realtime-chat-api/public/api/chat/send",
      *     summary="Send a message",
      *     tags={"Chat"},
      *     security={{"bearerAuth": {}}},
@@ -100,7 +100,7 @@ class ChatController extends Controller
     }
 /**
      * @OA\Get(
-     *     path="/api/chat/messages/{user_id}",
+     *     path="/realtime-chat-api/public/api/chat/messages/{user_id}",
      *     summary="Retrieve paginated messages for a user",
      *     tags={"Chat"},
      *     security={{"bearerAuth": {}}},
@@ -144,7 +144,7 @@ class ChatController extends Controller
     }
 /**
      * @OA\Patch(
-     *     path="/api/chat/read/{message_id}",
+     *     path="/realtime-chat-api/public/api/chat/read/{message_id}",
      *     summary="Mark a message as read",
      *     tags={"Chat"},
      *     security={{"bearerAuth": {}}},
@@ -161,8 +161,11 @@ class ChatController extends Controller
      */
     public function markAsRead($messageId)
     {
-        $message = $this->messageService->markMessageAsRead($messageId);
-        return response()->json(null, 200);
+        $messageId = $this->messageService->markMessageAsRead($messageId);
+
+        //return response()->json(null, 200);
+        
+        return response()->json(['status' => 'success']);
     }
     
 }

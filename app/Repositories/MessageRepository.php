@@ -23,12 +23,9 @@ class MessageRepository implements MessageRepositoryInterface
 
     public function markAsRead(int $messageId)
     {
+       
         $message = Message::findOrFail($messageId);
-        if ($message->receiver_id !== auth()->id()) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-        $message->update(['status' => 'read']);
-        
-        return $message;
+         $message->update(['status' => 'read']);
+         return $message;
     }
 }

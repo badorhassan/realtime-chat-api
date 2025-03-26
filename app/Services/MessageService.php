@@ -34,6 +34,7 @@ return $this->messageRepository->getMessagesForUser($userId, $page);
 
 public function markMessageAsRead($messageId)
 {
-return $this->messageRepository->markAsRead($messageId);
+    
+    return $this->messageRepository->markAsRead($messageId);
 }
 }

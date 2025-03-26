@@ -6,13 +6,187 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/chat/send": {
+        "/realtime-chat-api/public/api/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User login",
+                "operationId": "59b0a454ffd8e13aadfebe3808065c08",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "email": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/realtime-chat-api/public/api/me": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Get authenticated user details",
+                "operationId": "96348b2abf6c57d8cef0b37f3de816e0",
+                "responses": {
+                    "200": {
+                        "description": "User details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "type": "object"
+                                        },
+                                        "roles": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "permissions": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/realtime-chat-api/public/api/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User logout",
+                "operationId": "e5fd7a398c9c8475fb87ef04619c267d",
+                "responses": {
+                    "200": {
+                        "description": "Successful logout",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Successfully logged out"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/realtime-chat-api/public/api/chat/send": {
             "post": {
                 "tags": [
                     "Chat"
                 ],
                 "summary": "Send a message",
-                "operationId": "eff400320360edca81cd6e734d3bc771",
+                "operationId": "2f73cced03e00bf5ccd86f77da8d764e",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -84,13 +258,13 @@
                 ]
             }
         },
-        "/api/chat/messages/{user_id}": {
+        "/realtime-chat-api/public/api/chat/messages/{user_id}": {
             "get": {
                 "tags": [
                     "Chat"
                 ],
                 "summary": "Retrieve paginated messages for a user",
-                "operationId": "1866bdb76f39ebf30644a97b0cf8d5e2",
+                "operationId": "0acda498a2744f5ddd3e00bc2123deaa",
                 "parameters": [
                     {
                         "name": "user_id",
@@ -170,13 +344,13 @@
                 ]
             }
         },
-        "/api/chat/read/{message_id}": {
+        "/realtime-chat-api/public/api/chat/read/{message_id}": {
             "patch": {
                 "tags": [
                     "Chat"
                 ],
                 "summary": "Mark a message as read",
-                "operationId": "85a3944a887b9903f36135a32ed14753",
+                "operationId": "2e6bb22c37c99a4e05611d8460bfe664",
                 "parameters": [
                     {
                         "name": "message_id",
@@ -216,6 +390,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Authentication",
+            "description": "Authentication"
+        },
         {
             "name": "Chat",
             "description": "Chat"

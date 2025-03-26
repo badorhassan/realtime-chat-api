@@ -17,17 +17,28 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 import Echo from 'laravel-echo';
-window.Pusher = require('pusher-js');
+import Pusher from 'pusher-js';
+
+window.Pusher = Pusher;
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    forceTLS: true
+    forceTLS: true,
+    authEndpoint: '/broadcasting/auth' // For private channels
 });
 
-window.Echo.private(`chat.${userId}`)
-    .listen('MessageSent', (e) => {
-        console.log(e.message);
-        // Update UI with new message
+// Listen for messages
+window.Echo.private(`chat.${currentUserId}`)
+    .listen('.message.sent', (e) => {
+        // Handle incoming message
+        appendMessageToConversation(e);
+        
+        // Optional: Play notification sound
+        playNotificationSound();
+        
+        // Update UI to show new message
+        updateUnreadMessageCount(e.sender_id);
     });
+    

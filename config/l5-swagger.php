@@ -7,6 +7,7 @@ return [
             'api' => [
                 'title' => 'L5 Swagger UI',
             ],
+            'api_key_security_definition' => 'bearerAuth',
 
             'routes' => [
                 /*

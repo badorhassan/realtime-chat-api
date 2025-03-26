@@ -54,7 +54,7 @@ class ChatController extends Controller
      *             @OA\Property(property="sender_id", type="integer", example=1),
      *             @OA\Property(property="receiver_id", type="integer", example=2),
      *             @OA\Property(property="message", type="string", example="Hello, how are you?"),
-     *             @OA\Property(property="status", type="string", example="Sent"),
+     *             @OA\Property(property="status", type="string", example="delivered"),
      *             @OA\Property(property="created_at", type="string", example="2024-03-26T12:00:00Z")
      *         )
      *     ),

@@ -21,7 +21,7 @@ class MessageFactory extends Factory
         'sender_id' => User::factory(),
         'receiver_id' => User::factory(),
         'message' => $this->faker->sentence(),
-        'status' => 'sent'
+        'status' => 'delivered'
     ];
 }
 }

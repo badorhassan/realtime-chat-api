@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
             $table->text('message');
-            $table->enum('status', [ 'sent',  'delivered', 'read',  'failed'])->default('sent');
+            $table->enum('status', [ 'sent',  'delivered', 'read',  'failed'])->default('delivered');
             $table->timestamps();
 
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');

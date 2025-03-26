@@ -20,7 +20,7 @@ class MessageService
             'sender_id' => $senderId,
             'receiver_id' => $receiverId,
             'message' => $message,
-            'status' => 'sent',
+            'status' => 'delivered',
         ];
         $message = $this->messageRepository->store($data);
         event(new MessageSent($message)); // Trigger event

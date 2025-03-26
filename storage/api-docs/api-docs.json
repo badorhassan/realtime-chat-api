@@ -31,7 +31,7 @@
                                     "password": {
                                         "type": "string",
                                         "format": "password",
-                                        "example": "password123"
+                                        "example": "password"
                                     }
                                 },
                                 "type": "object"
@@ -232,7 +232,7 @@
                                         },
                                         "status": {
                                             "type": "string",
-                                            "example": "Sent"
+                                            "example": "delivered"
                                         },
                                         "created_at": {
                                             "type": "string",

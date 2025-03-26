@@ -82,7 +82,15 @@ return [
             /*
              * Absolute path to location where parsed annotations will be stored
              */
+            'annotations' => [base_path('app')],
+            /*
+             * Absolute path to location where parsed annotations will be stored
+             */
             'docs' => storage_path('api-docs'),
+            /*
+             * Absolute path to directory where to export views
+             */
+            'docs_json' => 'api-docs.json',
 
             /*
              * Absolute path to directory where to export views

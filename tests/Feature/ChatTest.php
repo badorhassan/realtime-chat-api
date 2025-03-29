@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Services\MessageService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ChatMessagingTest extends TestCase
+class ChatTest extends TestCase
 {
     use RefreshDatabase;
 
